@@ -460,50 +460,56 @@ section#portfolio .container {
   margin: auto;
   margin-top: 100px;
 }
+section#portfolio .container.perspective {
+  perspective: 400px;
+}
 section#portfolio .container .top-image {
   height: 30%;
   width: 45%;
-  background-image: url(../image/sarah.jpg);
+  background-image: url(../image/kraft-1.jpg);
   background-size: cover;
+  background-position: 50% 50%;
 }
 section#portfolio .container .middle-top-image {
   height: 35%;
   width: 25%;
-  background-image: url(../image/esther.jpg);
+  background-image: url(../image/only-one.jpg);
   background-size: cover;
   transform: translate(-30px, -75px);
 }
 section#portfolio .container .right-image {
   height: 22.5%;
   width: 30%;
-  background-image: url(../image/theBoss.jpg);
+  background-image: url(../image/kraft-mujka.jpg);
   background-size: cover;
+  background-position: 50% 50%;
 }
 section#portfolio .container .left-middle-image {
   height: 55%;
   width: 30%;
-  background-image: url(../image/IMG-20210222-WA0007.jpg);
+  background-image: url(../image/the-only.jpg);
   background-size: cover;
 }
 section#portfolio .container .middle-middle-image {
   height: 40%;
   width: 50%;
-  background-image: url(../image/groupe.jpg);
+  background-image: url(../image/the-special-girl.jpg);
   background-size: cover;
   transform: translateX(15px);
 }
 section#portfolio .container .right-middle-image {
   height: 25%;
   width: 20%;
-  background-image: url(../image/solokev.jpg);
+  background-image: url(../image/the-market.jpg);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: 50% 50%;
   transform: scaleX(1.5) translate(0px, -75px);
 }
 section#portfolio .container .left-bottom-image {
   height: 20%;
   width: 30%;
-  background-image: url(../image/polyglam.jpg);
+  background-image: url(../image/the-fouly.jpg);
   background-size: cover;
   background-position: center;
   transform: translateX(40%) translateY(10%);
@@ -511,20 +517,48 @@ section#portfolio .container .left-bottom-image {
 section#portfolio .container .bottom-middle-image {
   height: 50%;
   width: 20%;
-  background-image: url(../image/meiora.jpg);
+  background-image: url(../image/the-girl.jpg);
   background-size: cover;
   transform: translateY(-70%) scaleX(1.2) translateX(35%);
 }
 section#portfolio .container .right-bottom-image {
   height: 30%;
   width: 50%;
-  background-image: url(../image/krysMode.jpg);
+  background-image: url(../image/a-other-girl.jpg);
   background-size: cover;
-  background-position: center;
-  transform: translateX(27.5%) translateY(-35%);
+  background-position: 50% 50%;
+  transform: translateX(27.5%) translateY(-35%) scaley(1.2);
 }
 section#portfolio .container .image {
   position: relative;
+}
+section#portfolio .container .image img {
+  height: 100%;
+  width: 100%;
+}
+section#portfolio .container .image.transform {
+  height: 20%;
+  width: 20%;
+}
+@media screen and (max-width: 800px) {
+  section#portfolio .container.container {
+    height: 70vh;
+  }
+}
+@media screen and (max-width: 550px) {
+  section#portfolio .container.container {
+    height: 60vh;
+  }
+}
+@media screen and (max-width: 450px) {
+  section#portfolio .container.container {
+    height: 45vh;
+  }
+}
+@media screen and (max-height: 1350px) and (max-width: 1000px) {
+  section#portfolio .container.container {
+    height: 85vh;
+  }
 }
 section#portfolio::after {
   content: "";
@@ -584,7 +618,7 @@ section#contact .container-left::after {
   z-index: -1;
   height: 100%;
   width: 100%;
-  background-image: url(../image/meiora.jpg);
+  background-image: url(../image/kraft-image.jpg);
   background-size: cover;
   background-position: center;
 }
@@ -631,7 +665,8 @@ section#contact .container-right form input.fifty {
   height: 50px;
   width: 42.5%;
 }
-section#contact .container-right form input::placeholder, section#contact .container-right form textarea::placeholder {
+section#contact .container-right form input::placeholder,
+section#contact .container-right form textarea::placeholder {
   color: white;
 }
 section#contact .container-right form .textarea {
@@ -675,6 +710,19 @@ section#contact .container::after {
   background: rgba(0, 128, 0, 0.15);
   filter: blur(15px);
   transform: scaleX(1.02) scaleY(1.015);
+}
+@media screen and (max-width: 1100px) {
+  section#contact .container.container .container-left {
+    width: 350px;
+  }
+  section#contact .container.container .container-right {
+    left: 30%;
+    width: auto;
+  }
+  section#contact .container.container::after {
+    left: 0%;
+    width: auto;
+  }
 }
 section#contact .footer {
   height: auto;
@@ -738,7 +786,49 @@ footer h1 a.info:hover:after {
   opacity: 1;
 }
 
-*, ::before, ::after {
+.big-boss {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 5;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: rgba(14, 3, 3, 0.81);
+}
+.big-boss .croix {
+  position: fixed;
+  top: 5px;
+  right: 5px;
+  height: 30px;
+  width: 30px;
+  background-color: green;
+}
+.big-boss .image {
+  position: relative;
+}
+.big-boss .image img {
+  height: 100%;
+  width: 100%;
+}
+.big-boss .image.transform {
+  height: auto;
+  width: 40%;
+}
+.big-boss .image.transform img {
+  height: auto;
+}
+.big-boss .arrow {
+  height: 20px;
+  width: 5%;
+  background-color: green;
+}
+
+*,
+::before,
+::after {
   margin: 0;
   padding: 0;
   color: rgba(255, 255, 255, 0.875);
