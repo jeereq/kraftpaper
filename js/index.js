@@ -11,7 +11,87 @@ window.onload = function () {
 	let allLiens = document.querySelectorAll("header ul li a");
 	let allPortfolioImage = document.querySelectorAll(".container .image");
 	let allListeAbout = document.querySelectorAll("#about .container ul li");
+	let Cards = document.querySelectorAll(".card");
+	let arrowCard = document.querySelectorAll(".cards .arrow");
+	let bottom = document.querySelector(".bottom");
+	let init = 1;
 
+	PrevElement(Cards[init], 1);
+	NextElement(Cards[init], 1);
+
+	Cards.forEach((item, index) => {
+		bottom.append(createCard("div"));
+	});
+
+	let blocks = document.querySelectorAll(".bottom .block");
+	blocks[init].classList.add("active");
+
+	arrowCard.forEach((element) => {
+		element.addEventListener("click", (event) => {
+			let self = event.currentTarget;
+			const STEP = 92.5;
+			const SCALE = 1.3;
+
+			if (self.classList.contains("left")) {
+				if (init === 0) {
+					init = 1;
+				}
+				if (init > 0) {
+					init--;
+					Cards.forEach((item, index) => {
+						if (item.classList.contains("active"))
+							item.classList.remove("active");
+						if (init != index)
+							item.style.transform = `translatex(-${STEP * init}%)`;
+						Cards[init].classList.add("active");
+						Cards[init].style.transform = `translatex(-${
+							STEP * init
+						}%) scale(${SCALE})`;
+					});
+				}
+			}
+			if (self.classList.contains("right")) {
+				if (init < Cards.length) {
+					init++;
+					Cards.forEach((item, index) => {
+						if (item.classList.contains("active"))
+							item.classList.remove("active");
+						if (init != index)
+							item.style.transform = `translatex(-${STEP * init}%)`;
+						if (init < Cards.length) {
+							Cards[init].classList.add("active");
+							Cards[init].style.transform = `translatex(-${
+								STEP * init
+							}%) scale(${SCALE})`;
+						}
+					});
+				}
+			}
+
+			let parentBlock = blocks[init].parentElement;
+			parentBlock.querySelector(".active").classList.remove("active");
+			blocks[init].classList.add("active");
+
+			PrevElement(Cards[init], 1);
+			NextElement(Cards[init], 1);
+
+			if (init === Cards.length - 1) {
+				init = 0;
+			}
+			if (init === 0) {
+				Cards[init].classList.add("active");
+			}
+		});
+	});
+	Cards.forEach((element) => {
+		element.addEventListener("click", (event) => {
+			let parent = event.currentTarget.parentNode;
+			let self = event.currentTarget;
+
+			parent.querySelector(".active").classList.remove("active");
+			self.classList.add("active");
+		});
+	});
 	allPortfolioImage.forEach((element) => {
 		element.addEventListener("click", clickImage);
 	});
@@ -27,7 +107,7 @@ window.onload = function () {
 	});
 };
 
-selectLienActive = (event) => {
+let selectLienActive = (event) => {
 	let moi = event.target.parentNode;
 	if (!moi.classList.contains("active")) {
 		let parent = moi.parentNode;
@@ -36,7 +116,7 @@ selectLienActive = (event) => {
 	}
 };
 
-clickImage = (event) => {
+let clickImage = (event) => {
 	let original = event.target.parentNode;
 	let clone = event.target.parentNode.cloneNode(true);
 	let bigBoss = createElements(["big-boss"], document.body);
@@ -78,7 +158,7 @@ clickImage = (event) => {
 	});
 };
 
-clickListeAbout = (Event) => {
+let clickListeAbout = (Event) => {
 	let self = Event.currentTarget;
 	let attribut = self.id;
 	let directParent = Event.currentTarget.parentNode;
@@ -95,4 +175,32 @@ clickListeAbout = (Event) => {
 
 	active.classList.remove("active");
 	self.classList.add("active");
+};
+
+const PrevElement = (element, value) => {
+	let trueValue = 10 - value;
+	trueValue = trueValue / 10;
+	let prev = element.previousElementSibling;
+	if (prev) {
+		prev.style.transform += `scale(${trueValue})`;
+		return PrevElement(prev, value + 2);
+	}
+	return false;
+};
+
+const NextElement = (element, value) => {
+	let trueValue = 10 - value;
+	trueValue = trueValue / 10;
+	let prev = element.nextElementSibling;
+	if (prev) {
+		prev.style.transform += `scale(${trueValue})`;
+		return NextElement(prev, value + 2);
+	}
+	return false;
+};
+
+const createCard = (element) => {
+	let yes = document.createElement(element);
+	yes.classList.add("block");
+	return yes;
 };
